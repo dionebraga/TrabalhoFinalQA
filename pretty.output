@@ -1,0 +1,112 @@
+Feature: Adicionar Produto # features/add_product.feature:1
+  Como usuário
+  Quero adicionar um produto
+  Para gerenciar o inventário
+  Scenario: Adicionar um novo produto              # features/add_product.feature:6
+    Given que estou na página de adicionar produto # features/steps/add_product_steps.py:4
+      Traceback (most recent call last):
+        File "C:\Users\Dione\Desktop\Projeto Final QA\projeto_final\venv\Lib\site-packages\behave\model.py", line 1329, in run
+          match.run(runner.context)
+          ~~~~~~~~~^^^^^^^^^^^^^^^^
+        File "C:\Users\Dione\Desktop\Projeto Final QA\projeto_final\venv\Lib\site-packages\behave\matchers.py", line 98, in run
+          self.func(context, *args, **kwargs)
+          ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+        File "features\steps\add_product_steps.py", line 6, in step_open_add_product_page
+          context.driver.get(f"{context.base_url}/add_product")
+          ^^^^^^^^^^^^^^
+        File "C:\Users\Dione\Desktop\Projeto Final QA\projeto_final\venv\Lib\site-packages\behave\runner.py", line 321, in __getattr__
+          raise AttributeError(msg)
+      AttributeError: 'Context' object has no attribute 'driver'
+
+    When eu insiro os detalhes do produto          # None
+    And clico no botão de adicionar produto        # None
+    Then vejo uma mensagem de sucesso              # None
+
+Feature: Testar API do sistema de produtos # features/api_tests.feature:1
+
+  Scenario: Criar produto via API                      # features/api_tests.feature:2
+    Given que eu tenho os dados do produto             # features/steps/api_steps.py:4
+    When eu envio uma requisição POST para "/products" # features/steps/api_steps.py:12
+      Traceback (most recent call last):
+        File "C:\Users\Dione\Desktop\Projeto Final QA\projeto_final\venv\Lib\site-packages\behave\model.py", line 1329, in run
+          match.run(runner.context)
+          ~~~~~~~~~^^^^^^^^^^^^^^^^
+        File "C:\Users\Dione\Desktop\Projeto Final QA\projeto_final\venv\Lib\site-packages\behave\matchers.py", line 98, in run
+          self.func(context, *args, **kwargs)
+          ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+        File "features\steps\api_steps.py", line 14, in step_send_post_request
+          response = requests.post(f"{context.base_url}/products", json=context.product_data)
+                                      ^^^^^^^^^^^^^^^^
+        File "C:\Users\Dione\Desktop\Projeto Final QA\projeto_final\venv\Lib\site-packages\behave\runner.py", line 321, in __getattr__
+          raise AttributeError(msg)
+      AttributeError: 'Context' object has no attribute 'base_url'
+
+    Then o produto deve ser criado com sucesso         # None
+
+  Scenario: Listar produtos via API                   # features/api_tests.feature:7
+    Given que a API está funcional                    # None
+    When eu envio uma requisição GET para "/products" # None
+    Then devo receber a lista de produtos             # None
+
+Feature: Cadastro de Produtos # features/cadastro.feature:1
+  Como usuário
+  Quero adicionar novos produtos
+  Para gerenciar o inventário
+  Scenario: Adicionar um novo produto com sucesso           # features/cadastro.feature:6
+    Given que estou na página de cadastro de produtos       # None
+    When eu insiro os detalhes do produto                   # None
+      | Nome          | Descrição        | Preço  |
+      | Produto Teste | Produto de Teste | 100.00 |
+    And clico no botão "Salvar"                             # None
+    Then vejo uma mensagem "Produto cadastrado com sucesso" # None
+
+  Scenario: Tentar cadastrar um produto com informações inválidas          # features/cadastro.feature:14
+    Given que estou na página de cadastro de produtos                      # None
+    When eu insiro os detalhes do produto                                  # None
+      | Nome | Descrição | Preço |
+      |      |           | 0.00  |
+    And clico no botão "Salvar"                                            # None
+    Then vejo uma mensagem de erro "Preencha todos os campos obrigatórios" # None
+
+Feature: Login no Sistema # features/login.feature:1
+  Como colaborador
+  Quero fazer login no sistema
+  Para acessar as funcionalidades do backoffice
+  Scenario: Login bem-sucedido                      # features/login.feature:6
+    Given que eu estou na página de login           # features/steps/login_steps.py:4
+      Traceback (most recent call last):
+        File "C:\Users\Dione\Desktop\Projeto Final QA\projeto_final\venv\Lib\site-packages\behave\model.py", line 1329, in run
+          match.run(runner.context)
+          ~~~~~~~~~^^^^^^^^^^^^^^^^
+        File "C:\Users\Dione\Desktop\Projeto Final QA\projeto_final\venv\Lib\site-packages\behave\matchers.py", line 98, in run
+          self.func(context, *args, **kwargs)
+          ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+        File "features\steps\login_steps.py", line 6, in step_open_login_page
+          context.driver.get("https://projetofinal.jogajuntoinstituto.org/login")
+          ^^^^^^^^^^^^^^
+        File "C:\Users\Dione\Desktop\Projeto Final QA\projeto_final\venv\Lib\site-packages\behave\runner.py", line 321, in __getattr__
+          raise AttributeError(msg)
+      AttributeError: 'Context' object has no attribute 'driver'
+
+    When eu insiro credenciais válidas              # None
+    Then eu devo ser redirecionado para o dashboard # None
+
+  Scenario: Login mal-sucedido            # features/login.feature:11
+    Given que eu estou na página de login # features/steps/login_steps.py:4
+      Traceback (most recent call last):
+        File "C:\Users\Dione\Desktop\Projeto Final QA\projeto_final\venv\Lib\site-packages\behave\model.py", line 1329, in run
+          match.run(runner.context)
+          ~~~~~~~~~^^^^^^^^^^^^^^^^
+        File "C:\Users\Dione\Desktop\Projeto Final QA\projeto_final\venv\Lib\site-packages\behave\matchers.py", line 98, in run
+          self.func(context, *args, **kwargs)
+          ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+        File "features\steps\login_steps.py", line 6, in step_open_login_page
+          context.driver.get("https://projetofinal.jogajuntoinstituto.org/login")
+          ^^^^^^^^^^^^^^
+        File "C:\Users\Dione\Desktop\Projeto Final QA\projeto_final\venv\Lib\site-packages\behave\runner.py", line 321, in __getattr__
+          raise AttributeError(msg)
+      AttributeError: 'Context' object has no attribute 'driver'
+
+    When eu insiro credenciais inválidas  # None
+    Then eu devo ver uma mensagem de erro # None
+
